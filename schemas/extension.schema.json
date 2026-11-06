@@ -1,0 +1,152 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://workbench.local/schemas/extension.schema.json",
+  "title": "workbench.extension/v1",
+  "description": "扩展 Manifest 契约（26 SPEC §6）",
+  "type": "object",
+  "required": ["schemaVersion", "extension", "scope", "permissions"],
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": {
+      "const": "workbench.extension/v1"
+    },
+    "extension": {
+      "type": "object",
+      "required": ["id", "name", "version", "types"],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9-]{2,63}$"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "version": {
+          "type": "string",
+          "pattern": "^\\d+\\.\\d+\\.\\d+$"
+        },
+        "types": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "enum": ["assistant", "workflow"]
+          }
+        }
+      }
+    },
+    "scope": {
+      "type": "object",
+      "required": ["install", "run"],
+      "additionalProperties": false,
+      "properties": {
+        "install": {
+          "enum": ["global", "project"]
+        },
+        "run": {
+          "const": "project"
+        }
+      }
+    },
+    "permissions": {
+      "type": "object",
+      "required": ["files", "commands", "network", "credentials"],
+      "additionalProperties": false,
+      "properties": {
+        "files": {
+          "type": "object",
+          "required": ["read", "write"],
+          "additionalProperties": false,
+          "properties": {
+            "read": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "write": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "commands": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "network": {
+          "type": "boolean"
+        },
+        "credentials": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "model": {
+      "type": "object",
+      "required": ["defaultProfileId"],
+      "additionalProperties": false,
+      "properties": {
+        "defaultProfileId": {
+          "type": "string"
+        },
+        "allowedProfileIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "requirements": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "structuredOutput": {
+              "type": "boolean"
+            },
+            "minimumContextTokens": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        },
+        "cloudFallback": {
+          "type": "object",
+          "required": ["enabled"],
+          "additionalProperties": false,
+          "properties": {
+            "enabled": {
+              "type": "boolean"
+            }
+          }
+        }
+      }
+    },
+    "entrypoints": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["type", "id"],
+        "additionalProperties": false,
+        "properties": {
+          "type": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

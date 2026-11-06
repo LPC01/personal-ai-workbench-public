@@ -1,0 +1,38 @@
+[
+  {
+    "schemaVersion": "workbench.project/v1",
+    "project": {
+      "id": "demo-service",
+      "name": "示例服务",
+      "description": "Synthetic example; configure the root before registering."
+    },
+    "runtime": {
+      "root": "C:/Projects/demo-service",
+      "port": {
+        "strategy": "dynamic",
+        "from": 8160,
+        "to": 8169,
+        "environmentVariable": "PORT"
+      }
+    },
+    "webUI": {
+      "enabled": true,
+      "displayMode": "proxy",
+      "startCommandId": "start",
+      "healthCheck": {
+        "type": "http",
+        "url": "http://127.0.0.1:${port}/health",
+        "timeoutSeconds": 30
+      }
+    },
+    "commands": [
+      {
+        "id": "start",
+        "type": "service",
+        "executable": "node",
+        "arguments": ["server.mjs"],
+        "concurrency": "singleton"
+      }
+    ]
+  }
+]

@@ -1,0 +1,20 @@
+{
+  "name": "@workbench/domain",
+  "version": "0.2.0",
+  "private": true,
+  "type": "module",
+  "description": "共享领域基元：统一错误对象、request ID、结构化日志",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run"
+  }
+}

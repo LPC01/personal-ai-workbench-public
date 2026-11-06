@@ -1,0 +1,56 @@
+# Dependencies and build output
+node_modules/
+dist/
+build/
+coverage/
+*.tsbuildinfo
+
+# Runtime, verification output and local project registration
+var/
+logs/
+artifacts/
+backups/
+playwright-report/
+test-results/
+docs/operations/
+*.log
+*.local.json
+*.local.yaml
+*.local.yml
+scripts/projects.registry.json
+
+# Environment and credentials
+.env
+.env.*
+!.env.example
+credentials/
+secrets/
+.secrets/
+*.pem
+*.key
+*.pfx
+*.p12
+*.jks
+*.db
+*.db-*
+*.sqlite
+*.sqlite-*
+*.sqlite3
+*.sqlite3-*
+
+# Private material and archives
+*.doc
+*.docx
+*.xls
+*.xlsx
+*.ppt
+*.pptx
+*.pdf
+*.zip
+*.7z
+
+# OS and editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

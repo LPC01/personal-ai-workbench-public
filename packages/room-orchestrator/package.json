@@ -1,0 +1,24 @@
+{
+  "name": "@workbench/room-orchestrator",
+  "version": "0.2.0",
+  "private": true,
+  "type": "module",
+  "description": "聊天室编排运行时：会话建立、发言调度、Handoff、预算与终止（29 SPEC §4/§7/§12/§21）",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@workbench/contracts": "workspace:*",
+    "@workbench/domain": "workspace:*"
+  }
+}

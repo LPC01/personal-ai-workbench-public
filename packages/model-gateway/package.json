@@ -1,0 +1,24 @@
+{
+  "name": "@workbench/model-gateway",
+  "version": "0.2.0",
+  "private": true,
+  "type": "module",
+  "description": "模型网关：Provider/Profile、凭据存储与 Adapter",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@workbench/contracts": "workspace:*",
+    "@workbench/domain": "workspace:*"
+  }
+}

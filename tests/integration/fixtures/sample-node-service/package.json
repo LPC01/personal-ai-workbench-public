@@ -1,0 +1,8 @@
+{
+  "name": "sample-node-service",
+  "version": "1.0.0",
+  "private": true,
+  "description": "工作台接入演示用真实 Node HTTP 服务（含健康检查与 Web 页）",
+  "type": "commonjs",
+  "main": "server.js"
+}

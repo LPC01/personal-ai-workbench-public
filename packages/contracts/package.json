@@ -1,0 +1,23 @@
+{
+  "name": "@workbench/contracts",
+  "version": "0.2.0",
+  "private": true,
+  "type": "module",
+  "description": "JSON Schema 契约与验证器（外部契约的权威 Schema）",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "ajv": "^8.20.0"
+  }
+}

@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>个人 AI 全局工作台</title>
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23185fa5'/%3E%3Ctext x='16' y='23' font-size='17' font-family='system-ui' text-anchor='middle' fill='%23ffffff'%3EW%3C/text%3E%3C/svg%3E"
+    />
+    <!--
+      首屏主题判定：在 CSS/JS 加载前先写 data-theme，避免深色偏好下白屏闪烁。
+      与 src/theme.ts 的键名和取值保持一致（30 号视觉基线 §3.2）。
+    -->
+    <script>
+      (function () {
+        try {
+          var mode = window.localStorage.getItem('wb-theme') || 'system';
+          var dark =
+            mode === 'dark' ||
+            (mode === 'system' &&
+              window.matchMedia &&
+              window.matchMedia('(prefers-color-scheme: dark)').matches);
+          document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+        } catch (e) {
+          document.documentElement.setAttribute('data-theme', 'light');
+        }
+      })();
+    </script>
+    <style>
+      html {
+        background: #ffffff;
+      }
+      html[data-theme='dark'] {
+        background: #0d1117;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

@@ -1,0 +1,25 @@
+{
+  "name": "@workbench/memory-gateway",
+  "version": "0.2.0",
+  "private": true,
+  "type": "module",
+  "description": "Memory Gateway：MemoryProvider 契约 + OpenViking Adapter + 降级实现",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@workbench/contracts": "workspace:*",
+    "@workbench/domain": "workspace:*",
+    "@workbench/persistence": "workspace:*"
+  }
+}

@@ -1,0 +1,170 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://workbench.local/schemas/project.schema.json",
+  "title": "workbench.project/v1",
+  "description": "项目 Manifest 契约（26 SPEC §5）",
+  "type": "object",
+  "required": ["schemaVersion", "project", "runtime"],
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": {
+      "const": "workbench.project/v1"
+    },
+    "project": {
+      "type": "object",
+      "required": ["id", "name"],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9-]{2,63}$"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "description": {
+          "type": "string"
+        }
+      }
+    },
+    "runtime": {
+      "type": "object",
+      "required": ["root"],
+      "additionalProperties": false,
+      "properties": {
+        "root": {
+          "type": "string"
+        },
+        "port": {
+          "type": "object",
+          "required": ["strategy", "from", "to"],
+          "additionalProperties": false,
+          "properties": {
+            "strategy": {
+              "const": "dynamic"
+            },
+            "from": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 65535
+            },
+            "to": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 65535
+            },
+            "environmentVariable": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "webUI": {
+      "type": "object",
+      "required": ["enabled", "displayMode"],
+      "additionalProperties": false,
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "displayMode": {
+          "enum": ["external", "proxy", "embedded"]
+        },
+        "startCommandId": {
+          "type": "string"
+        },
+        "stopCommandId": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        },
+        "healthCheck": {
+          "type": "object",
+          "required": ["type", "url"],
+          "additionalProperties": false,
+          "properties": {
+            "type": {
+              "const": "http"
+            },
+            "url": {
+              "type": "string"
+            },
+            "timeoutSeconds": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        }
+      }
+    },
+    "commands": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "type", "executable"],
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "type": {
+            "enum": ["service", "job"]
+          },
+          "executable": {
+            "type": "string",
+            "minLength": 1
+          },
+          "arguments": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "cwd": {
+            "type": "string"
+          },
+          "timeoutSeconds": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "concurrency": {
+            "enum": ["singleton", "parallel"]
+          }
+        }
+      }
+    },
+    "models": {
+      "type": "object",
+      "required": ["defaultProfileId"],
+      "additionalProperties": false,
+      "properties": {
+        "defaultProfileId": {
+          "type": "string"
+        },
+        "allowedProfileIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "memory": {
+      "type": "object",
+      "required": ["defaultScope"],
+      "additionalProperties": false,
+      "properties": {
+        "defaultScope": {
+          "type": "string"
+        },
+        "crossProjectRecall": {
+          "type": "boolean"
+        }
+      }
+    }
+  }
+}

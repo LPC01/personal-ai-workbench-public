@@ -1,0 +1,150 @@
+/**
+ * 设计令牌（30 号视觉基线 §3.2：支持浅色和深色主题，语义不依赖单一颜色）。
+ *
+ * 约定：
+ * - 令牌按「语义」命名（surface / text / danger / success…），颜色只是语义的载体；
+ * - 组件一律引用 var(--wb-*)，不写字面色值，主题切换零重渲染；
+ * - data-theme 由 src/theme.ts 与 index.html 内联脚本设置（light | dark）；
+ * - 状态语义不依赖单一颜色：所有状态同时带文字标签（见各视图）。
+ */
+
+:root {
+  color-scheme: light;
+
+  /* ---- 表面 / 背景 ---- */
+  --wb-bg: #ffffff;
+  --wb-surface: #ffffff;
+  --wb-surface-soft: #f9fafb;
+  --wb-surface-muted: #f3f4f6;
+
+  /* ---- 边框 ---- */
+  --wb-border: #e5e7eb;
+  --wb-border-strong: #d1d5db;
+  --wb-border-subtle: #f3f4f6;
+
+  /* ---- 文字 ---- */
+  --wb-text-strong: #111827;
+  --wb-text: #374151;
+  --wb-text-muted: #6b7280;
+  --wb-text-subtle: #9ca3af;
+  --wb-text-disabled: #d1d5db;
+  --wb-on-solid: #ffffff;
+
+  /* ---- 强调 ---- */
+  --wb-accent: #185fa5;
+  --wb-accent-strong: #378add;
+  --wb-accent-soft: #e6f1fb;
+
+  /* ---- 危险 ---- */
+  --wb-danger: #a32d2d;
+  --wb-danger-strong: #c62828;
+  --wb-danger-soft: #fcebeb;
+  --wb-danger-border: #e08a8a;
+
+  /* ---- 成功 ---- */
+  --wb-success: #0f6e56;
+  --wb-success-alt: #2e7d32;
+  --wb-success-border: #2e9e7a;
+  --wb-success-soft: #e8f6ef;
+
+  /* ---- 警告 ---- */
+  --wb-warn: #854f0b;
+  --wb-warn-strong: #b26a00;
+  --wb-warn-alert: #ef6c00;
+  --wb-warn-soft: #faeeda;
+  --wb-warn-border: #f0c675;
+
+  /* ---- 阴影 ---- */
+  --wb-shadow-drawer: -8px 0 24px rgba(0, 0, 0, 0.08);
+
+  /* ---- 尺度标度（UI-07 组件层统一引用；视图不得再写临时字面量） ---- */
+  --wb-space-1: 4px;
+  --wb-space-2: 8px;
+  --wb-space-3: 12px;
+  --wb-space-4: 16px;
+  --wb-space-5: 24px;
+  --wb-space-6: 32px;
+
+  --wb-radius-sm: 6px;
+  --wb-radius-md: 8px;
+  --wb-radius-lg: 12px;
+  --wb-radius-full: 999px;
+
+  --wb-shadow-1: 0 1px 2px rgba(16, 24, 40, 0.06);
+  --wb-shadow-2: 0 4px 12px rgba(16, 24, 40, 0.08);
+  --wb-shadow-3: 0 12px 32px rgba(16, 24, 40, 0.14);
+
+  --wb-surface-hover: #f3f4f6;
+  --wb-surface-elevated: #ffffff;
+  /* 透明控件 hover 时叠加的中性色（与具体表面色解耦） */
+  --wb-overlay-hover: rgba(17, 24, 39, 0.05);
+  --wb-focus-ring: #378add;
+
+  --wb-font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace;
+  --wb-duration: 150ms;
+  --wb-ease: cubic-bezier(0.2, 0, 0.2, 1);
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+
+  --wb-bg: #0d1117;
+  --wb-surface: #161b22;
+  --wb-surface-soft: #1b2129;
+  --wb-surface-muted: #21262d;
+
+  --wb-border: #30363d;
+  --wb-border-strong: #3d444d;
+  --wb-border-subtle: #21262d;
+
+  --wb-text-strong: #e6edf3;
+  --wb-text: #c9d1d9;
+  --wb-text-muted: #8b949e;
+  --wb-text-subtle: #6e7681;
+  --wb-text-disabled: #484f58;
+  /* 实心强调块上的文字：深色主题下强调色本身变亮，文字反转为深色 */
+  --wb-on-solid: #0b1220;
+
+  --wb-accent: #58a6ff;
+  --wb-accent-strong: #79c0ff;
+  --wb-accent-soft: #12253d;
+
+  --wb-danger: #ff7b72;
+  --wb-danger-strong: #ffa198;
+  --wb-danger-soft: #3a1d1c;
+  --wb-danger-border: #6e2a26;
+
+  --wb-success: #3fb950;
+  --wb-success-alt: #56d364;
+  --wb-success-border: #2e6b3a;
+  --wb-success-soft: #10281a;
+
+  --wb-warn: #d29922;
+  --wb-warn-strong: #e3b341;
+  --wb-warn-alert: #ff9a4d;
+  --wb-warn-soft: #2d2412;
+  --wb-warn-border: #6b5426;
+
+  --wb-shadow-drawer: -8px 0 24px rgba(0, 0, 0, 0.6);
+
+  --wb-shadow-1: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --wb-shadow-2: 0 4px 12px rgba(0, 0, 0, 0.5);
+  --wb-shadow-3: 0 12px 32px rgba(0, 0, 0, 0.6);
+
+  --wb-surface-hover: #21262d;
+  --wb-surface-elevated: #1b2129;
+  --wb-overlay-hover: rgba(255, 255, 255, 0.06);
+  --wb-focus-ring: #79c0ff;
+}
+
+html,
+body {
+  margin: 0;
+  background: var(--wb-bg);
+  color: var(--wb-text);
+  font-family:
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    sans-serif;
+}
